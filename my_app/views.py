@@ -81,7 +81,7 @@ def enroll_data(request):
         )
 
     data = Enrollment_Model.objects.all()
-    filter_data = Enrollment_Model.objects.filter(status="Enrolled")
+    filter_data = Enrollment_Model.objects.filter(status="Not Enrolled")
     data_pack = {
         "title": "Enrollment Directory",
         "item": data,
@@ -89,5 +89,9 @@ def enroll_data(request):
     }
     return render(request, "enrollment.html", data_pack)
 
-def enroll_details(request):
-    return render(request)
+
+def enroll_details(request, e_id):
+    data = Enrollment_Model.objects.get(id=e_id)
+    data_pack = {"item": data}
+    print("ffff", data_pack)
+    return render(request, "enroll_details.html", data_pack)
