@@ -1,5 +1,42 @@
 {% extends 'masters/base.html' %} {% block blockname %}
 
+<div class="form-container">
+  <h2>Course Enrollment</h2>
+  <form action="" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="student_name">Student Name</label>
+      <input
+        type="text"
+        id="student_name"
+        name="student_name"
+        placeholder="Enter student's full name"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="course_title">Course Title</label>
+      <input
+        type="text"
+        id="course_title"
+        name="course_title"
+        placeholder="e.g. Web Development"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="status">Enrollment Status</label>
+      <input type="text" id="status" name="status" placeholder="e.g. Enroll/notEnroll" required />
+    </div>
+
+    <button type="submit" class="submit-btn">Enroll Student</button>
+  </form>
+</div>
+
+<br /><br />
 <div class="table-container">
   <div class="table-header">
     <h2>{{ title}}</h2>
@@ -14,6 +51,7 @@
         <th>Student Name</th>
         <th>Course Title</th>
         <th>Status</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -21,10 +59,46 @@
       <tr>
         <td data-label="sl">{{ forloop.counter }}</td>
         <td data-label="Name"><strong>{{ x.student_name }}</strong></td>
-        <td data-label="Email" class="email-link">{{ x.course_title }}</class=>
+        <td data-label="course_title" class="email-link">{{ x.course_title }}</td>
+        <td data-label="status">{{ x.status }}</td>
+        <td data-label="View"><a href="{% url 'enroll_details' x.id %}">View</a></td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" style="text-align: center; padding: 30px">
+          No Enroll found in the database.
         </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<br />
+<br />
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}} <span style="text-decoration: underline">Filter Method</span></h2>
+
+    <p>Total Records: <strong>{{ filter_item.count }}</strong></p>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>SL</th>
+        <th>Student Name</th>
+        <th>Course Title</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in filter_item %}
+      <tr>
+        <td data-label="sl">{{ forloop.counter }}</td>
+        <td data-label="Name"><strong>{{ x.student_name }}</strong></td>
+        <td data-label="Email" class="email-link">{{ x.course_title }}</td>
         <td data-label="Phone">{{ x.status }}</td>
-        
       </tr>
       {% empty %}
       <tr>

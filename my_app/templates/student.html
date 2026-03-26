@@ -1,6 +1,41 @@
 {% extends 'masters/base.html' %} {% block blockname %}
 
-<br /><br />
+<div class="form-container">
+  <h2>Student Registration</h2>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="student_name" placeholder="Enter full name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="student_email" placeholder="example@mail.com" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="student_phone" placeholder="017XXXXXXXX" required />
+    </div>
+
+    <div class="form-group">
+      <label for="address">Residential Address</label>
+      <textarea
+        id="address"
+        name="student_address"
+        placeholder="Enter full address"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Save Student Information</button>
+  </form>
+</div>
+<br />
+<br />
+
 <div class="table-container">
   <div class="table-header">
     <h2>{{ title}} <span style="text-decoration: underline">All Method</span></h2>
@@ -16,6 +51,7 @@
         <th>Email Address</th>
         <th>Phone Number</th>
         <th>Full Address</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +64,7 @@
         </td>
         <td data-label="Phone">{{ student.phone }}</td>
         <td data-label="Address" class="address-text">{{ student.address }}</td>
+        <td data-label="view" class="address-text"><a href="{% url 'student_details' student.id %}">view</a></td>
       </tr>
       {% empty %}
       <tr>
@@ -51,6 +88,7 @@
   <table class="student-table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Student Name</th>
         <th>Email Address</th>
         <th>Phone Number</th>
@@ -59,6 +97,7 @@
     </thead>
     <tbody>
       <tr>
+        <td data-label="id">{{ single_item.id }}</td>
         <td data-label="Name"><strong>{{ single_item.name }}</strong></td>
         <td data-label="Email" class="email-link">{{ single_item.email }}</td>
         <td data-label="Phone">{{ single_item.phone }}</td>
@@ -77,6 +116,7 @@
   <table class="student-table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Student Name</th>
         <th>Email Address</th>
         <th>Phone Number</th>
@@ -86,6 +126,7 @@
     <tbody>
       {% for x in filter_item %}
       <tr>
+        <td data-label="id">{{ x.id }}</td>
         <td data-label="Name"><strong>{{ x.name }}</strong></td>
         <td data-label="Email" class="email-link">{{ x.email }}</td>
         <td data-label="Phone">{{ x.phone }}</td>

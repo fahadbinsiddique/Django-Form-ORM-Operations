@@ -1,5 +1,48 @@
 {% extends 'masters/base.html' %} {% block blockname %}
 
+<div class="form-container">
+  <h2>Add New Course</h2>
+  <form action="" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="title">Course Title</label>
+      <input
+        type="text"
+        id="title"
+        name="course_title"
+        placeholder="e.g. Django Full Stack"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="fee">Course Fee (BDT)</label>
+      <input type="number" id="fee" name="course_fee" placeholder="Enter fee amount" required />
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duration (Months)</label>
+      <input type="number" id="duration" name="course_duration" placeholder="e.g. 6" required />
+    </div>
+
+    <div class="form-group">
+      <label for="instructor">Instructor Name</label>
+      <input
+        type="text"
+        id="instructor"
+        name="instructor_name"
+        placeholder="Enter instructor's name"
+        required
+      />
+    </div>
+
+    <button type="submit" class="submit-btn">Save</button>
+  </form>
+</div>
+<br />
+<br />
+
 <div class="table-container">
   <div class="table-header">
     <h2>{{ title}}</h2>
@@ -15,12 +58,83 @@
         <th>Fee</th>
         <th>Duration</th>
         <th>Instructor Name</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {% for course in item %}
       <tr>
         <td data-label="sl">{{ forloop.counter }}</td>
+        <td data-label="Name"><strong>{{ course.title }}</strong></td>
+        <td data-label="Email">{{ course.fee }}</td>
+        <td data-label="Phone">{{ course.duration }}</td>
+        <td data-label="Address" class="address-text">{{ course.instructor_name }}</td>
+        <td data-label="view" class="address-text">
+          <a href="{% url 'course_details' course.id %}">view</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" style="text-align: center; padding: 30px">
+          No Course found in the database.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<br /><br />
+
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}} <span style="text-decoration: underline">Get Method</span></h2>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Fee</th>
+        <th>Duration</th>
+        <th>Instructor Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="id">{{ single_item.id }}</td>
+        <td data-label="title"><strong>{{ single_item.title }}</strong></td>
+        <td data-label="fee">{{ single_item.fee }}</td>
+        <td data-label="duration">{{ single_item.duration }}</td>
+        <td data-label="instructor_name" class="address-text">{{ single_item.instructor_name }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br /><br />
+
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}} <span style="text-decoration: underline">Filter Method</span></h2>
+
+    <p>Total Records: <strong>{{ filter_item.count }}</strong></p>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Fee</th>
+        <th>Duration</th>
+        <th>Instructor Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in filter_item %}
+      <tr>
+        <td data-label="id">{{ course.id }}</td>
         <td data-label="Name"><strong>{{ course.title }}</strong></td>
         <td data-label="Email">{{ course.fee }}</td>
         <td data-label="Phone">{{ course.duration }}</td>
@@ -36,4 +150,5 @@
     </tbody>
   </table>
 </div>
+
 {% endblock blockname %}
