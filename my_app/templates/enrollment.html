@@ -1,0 +1,39 @@
+{% extends 'masters/base.html' %} {% block blockname %}
+
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}}</h2>
+
+    <p>Total Records: <strong>{{ item.count }}</strong></p>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>SL</th>
+        <th>Student Name</th>
+        <th>Course Title</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in item %}
+      <tr>
+        <td data-label="sl">{{ forloop.counter }}</td>
+        <td data-label="Name"><strong>{{ x.student_name }}</strong></td>
+        <td data-label="Email" class="email-link">{{ x.course_title }}</class=>
+        </td>
+        <td data-label="Phone">{{ x.status }}</td>
+        
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" style="text-align: center; padding: 30px">
+          No Enroll found in the database.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock blockname %}

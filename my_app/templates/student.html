@@ -1,0 +1,99 @@
+{% extends 'masters/base.html' %} {% block blockname %}
+
+<br /><br />
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}} <span style="text-decoration: underline">All Method</span></h2>
+
+    <p>Total Records: <strong>{{ item.count }}</strong></p>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>SL</th>
+        <th>Student Name</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <th>Full Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in item %}
+      <tr>
+        <td data-label="sl">{{ forloop.counter }}</td>
+        <td data-label="Name"><strong>{{ student.name }}</strong></td>
+        <td data-label="Email">
+          <a href="mailto:{{ student.email }}" class="email-link">{{ student.email }}</a>
+        </td>
+        <td data-label="Phone">{{ student.phone }}</td>
+        <td data-label="Address" class="address-text">{{ student.address }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" style="text-align: center; padding: 30px">
+          No students found in the database.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<br />
+<br />
+
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}} <span style="text-decoration: underline">Get Method</span></h2>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <th>Full Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Name"><strong>{{ single_item.name }}</strong></td>
+        <td data-label="Email" class="email-link">{{ single_item.email }}</td>
+        <td data-label="Phone">{{ single_item.phone }}</td>
+        <td data-label="Address" class="address-text">{{ single_item.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br /><br />
+<div class="table-container">
+  <div class="table-header">
+    <h2>{{ title}} <span style="text-decoration: underline">Filter Method</span></h2>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <th>Full Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in filter_item %}
+      <tr>
+        <td data-label="Name"><strong>{{ x.name }}</strong></td>
+        <td data-label="Email" class="email-link">{{ x.email }}</td>
+        <td data-label="Phone">{{ x.phone }}</td>
+        <td data-label="Address" class="address-text">{{ x.address }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock blockname %}

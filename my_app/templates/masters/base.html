@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django ORM</title>
+    <style>
+      /* Basic Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 1rem 5%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3436;
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: #0984e3; /* Blue accent */
+      }
+
+      /* Nav Links */
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #636e72;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      /* Hover Animation */
+      .nav-links a:hover {
+        color: #0984e3;
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #0984e3;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .table-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+
+      .table-header h2 {
+        color: #2c3e50;
+        font-size: 24px;
+      }
+
+      .student-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+
+      .student-table thead tr {
+        background-color: #0984e3;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .student-table th,
+      .student-table td {
+        padding: 15px 20px;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      .student-table tbody tr {
+        transition: background-color 0.3s ease;
+      }
+
+      .student-table tbody tr:last-of-type {
+        border-bottom: 2px solid #0984e3;
+      }
+
+      .student-table tbody tr:hover {
+        background-color: #f9fbff;
+        cursor: pointer;
+      }
+
+      /* Status Badge Style (Optional) */
+      .email-link {
+        color: #0984e3;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .address-text {
+        color: #636e72;
+        font-size: 0.9rem;
+        max-width: 250px;
+      }
+
+      .form-container {
+        background: #ffffff;
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container h2 {
+        color: #1a73e8;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 24px;
+        align-items: center;
+        
+        
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #444;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #1a73e8;
+        background-color: #f8fbff;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        background-color: #1557b0;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'masters/nav.html' %}
+
+    <div style="padding: 2rem 5%">{% block blockname %} {% endblock blockname %}</div>
+  </body>
+</html>
